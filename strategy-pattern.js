@@ -27,14 +27,6 @@ class Taxi extends Vehicle {
   }
 }
 
-// strategy 3
-class PersonalCar extends Vehicle {
-  constructor() {
-    super();
-    this._timeTaken = 3;
-  }
-}
-
 // usage
 const commute = new Commute();
 
