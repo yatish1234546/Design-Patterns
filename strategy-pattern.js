@@ -1,40 +1,42 @@
-function Fedex() {
-  this.calculate = package => {
-    return 2.5;
-  };
+// encapsulation
+class Commute {
+  travel(transport) {
+    return transport.travelTime();
+  }
 }
 
-function UPS() {
-  this.calculate = package => {
-    return 2.25;
-  };
+class Vehicle {
+  travelTime() {
+    return this._timeTaken;
+  }
 }
 
-function Maersk() {
-  this.calculate = package => {
-    return 3;
-  };
+// strategy 1
+class Bus extends Vehicle {
+  constructor() {
+    super();
+    this._timeTaken = 10;
+  }
 }
 
-function Shipping() {
-  this.company = null;
-
-  this.setStrategy = company => (this.company = company);
-
-  this.calculate = package => {
-    return this.company.calculate(package);
-  };
+// strategy 2
+class Taxi extends Vehicle {
+  constructor() {
+    super();
+    this._timeTaken = 5;
+  }
 }
 
-const fedex = new Fedex();
-const ups = new UPS();
-const maersk = new Maersk();
-const package = { from: "Miami", to: "Chicago", weight: 150 };
-const shipping = new Shipping();
+// strategy 3
+class PersonalCar extends Vehicle {
+  constructor() {
+    super();
+    this._timeTaken = 3;
+  }
+}
 
-shipping.setStrategy(fedex);
-console.log(shipping.calculate(package));
-shipping.setStrategy(ups);
-console.log(shipping.calculate(package));
-shipping.setStrategy(maersk);
-console.log(shipping.calculate(package));
+// usage
+const commute = new Commute();
+
+console.log(commute.travel(new Taxi())); // 5
+console.log(commute.travel(new Bus())); // 10
